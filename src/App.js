@@ -4,7 +4,7 @@ import MainPage from './pages/MainPage.jsx';
 import LoginPage from './pages/login.jsx';
 import SignupPage from './pages/signup';
 import DictionaryPage from './pages/dictionary/addWord';
-import CommunityPage from './pages/community/post';
+import CommunityPage from './pages/community/CommunityPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route exact path='/' element={<LoginPage/>}/>
           <Route exact path='/signup' element={<SignupPage/>}/>
           <Route exact path='/dictionary' element={<DictionaryPage/>}/>
-          <Route exact path='/community' element={<CommunityPage/>}/>
+          <Route exact path='/CommunityPage' element={<CommunityPage/>}/>
         </Routes>
       </Router>
     </div>

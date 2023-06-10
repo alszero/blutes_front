@@ -129,7 +129,7 @@ const Header = ({ isToggled, userToggled, setIsToggled, setUserToggled }) => {
   `;
 
   const navigate = useNavigate();
-  const navigateToCommunity = () => {navigate('/community');};
+  const navigateToCommunity = () => {navigate('/CommunityPage');};
   const navigateToDictionary = () => {navigate('/dictionary');};
 
   return (

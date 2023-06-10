@@ -1,7 +1,7 @@
-// PostForm.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from "../Header.js";
+import Header from '../Header.js';
 
 const PageContainer = styled.div`
   display: flex;
@@ -11,36 +11,41 @@ const PageContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  max-width: 400px;
-  padding: 50px;
-  margin-top: -5%;
-  border: 1px solid #071DA1;
+  max-width: 600px;
+  padding: 30px;
+  margin-top: -4%;
   border-radius: 5px;
   text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 `;
 
 const TitleInput = styled.input`
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  font-size: 18px;
 `;
 
 const ContentTextarea = styled.textarea`
   width: 100%;
+  height: 200px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  font-size: 16px;
 `;
 
 const TagInput = styled.input`
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  font-size: 16px;
 `;
 
 const SubmitButton = styled.button`
@@ -49,16 +54,31 @@ const SubmitButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 3px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #45a049;
+  }
 `;
 
 function PostForm({ onSubmit }) {
-  const [isToggled, setIsToggled] = useState(false);
-  const [userToggled, setUserToggled] = useState(false);
-
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleTagInputChange = (e) => {
+    const value = e.target.value;
+    const lastChar = value.charAt(value.length - 1);
+    if (lastChar === ' ') {
+      setTags((prevTags) => prevTags.trim() + '#');
+    } else {
+      setTags(value);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,38 +86,37 @@ function PostForm({ onSubmit }) {
     setTitle('');
     setContent('');
     setTags('');
+
+    navigate('/community');
   };
 
   return (
     <div>
-      <Header
-        istoggled={isToggled}
-        usertoggled={userToggled}
-        setIsToggled={setIsToggled}
-        setUserToggled={setUserToggled}
-      />
+      <Header />
       <PageContainer>
         <FormContainer>
           <h2>글 작성</h2>
           <form onSubmit={handleSubmit}>
             <TitleInput
               type="text"
+              placeholder="제목"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="제목"
+              required
             />
             <ContentTextarea
+              placeholder="내용"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="내용"
-            ></ContentTextarea>
+              required
+            />
             <TagInput
               type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
               placeholder="태그"
+              value={tags}
+              onChange={handleTagInputChange}
             />
-            <SubmitButton type="submit">작성</SubmitButton>
+            <SubmitButton type="submit">작성하기</SubmitButton>
           </form>
         </FormContainer>
       </PageContainer>
