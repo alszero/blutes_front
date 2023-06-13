@@ -1,4 +1,5 @@
 import React from 'react';
+import { Main } from './pages/dictionary/Main';
 
 const VocabularyList = ({ wordList }) => {
   return (
