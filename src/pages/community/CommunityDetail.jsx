@@ -137,7 +137,8 @@ const CommenterCount = styled.p`
   margin-left: 20px;
   color: #071DA1;
 `;
-const CommunityPage = () => {
+
+const CommunityDetail = () => {
   return (
     <div>
       <Header />
@@ -173,4 +174,4 @@ const CommunityPage = () => {
   );
 };
 
-export default CommunityPage;
+export default CommunityDetail;
