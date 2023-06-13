@@ -3,7 +3,7 @@ import './App.css';
 import MainPage from './pages/MainPage.jsx';
 import LoginPage from './pages/login.jsx';
 import SignupPage from './pages/signup';
-import DictionaryPage from './pages/dictionary/Main';
+import DictionaryPage from './pages/dictionary/AddWordForm';
 import CommunityPage from './pages/community/CommunityPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Header from "../Header.js";
 
 const MainContainer = styled.div`
   display: flex;
@@ -13,12 +14,13 @@ const MainContainer = styled.div`
 const BigBox = styled.div`
   width: 800px;
   height: auto;
-  border: 1px solid black;
+  border: 1px solid #F4F4F4;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   margin-top: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const SmallBox = styled.div`
@@ -54,7 +56,7 @@ const SmallBox = styled.div`
     flex-basis: calc(50% - 15px);
     margin-top: 20px;
     height: 200px;
-    border: 1px solid black;
+    border: 1px solid #E0E0E0;
   }
 `;
 
@@ -130,7 +132,7 @@ const TodayWordsContainer = styled.div`
   margin-top: 20px;
   height: auto;
   width: 700px;
-  border: 1px solid black;
+  border: 1px solid #E0E0E0;
   margin-left: 30px;
   margin-right: 50px;
 `;
@@ -141,6 +143,8 @@ const ReviewTitle = styled.div`
 
 function Main() {
   return (
+    <>
+    <Header />
     <MainContainer>
       <SearchContainer>
         <SearchInput type="text" placeholder="검색어 입력" />
@@ -194,6 +198,7 @@ function Main() {
         </SmallBox>
       </BigBox>
     </MainContainer>
+    </>
   );
 }
 
