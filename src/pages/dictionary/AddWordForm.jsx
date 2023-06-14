@@ -7,11 +7,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 가운데 정렬을 위한 추가 */
+  justify-content: center;
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #f2f2f2;
-  height: 100vh; /* 컨테이너가 화면의 전체 높이를 차지하도록 설정 */
+  height: 100vh;
 `;
 
 const Title = styled.h1`
@@ -68,27 +68,37 @@ const SubmitButton = styled.input`
   font-size: 14px;
 `;
 
-const AddWordForm = () => {
-  const [words, setWords] = useState([]);
-  const navigate = useNavigate(); // useNavigate 훅 사용
+const AddWordForm = ({ addWord }) => {
+  const [abbreviation, setAbbreviation] = useState('');
+  const [meaning, setMeaning] = useState('');
+  const [sentence, setSentence] = useState('');
+  const navigate = useNavigate();
+
+  // addWord 함수 정의
+  const handleAddWord = (newWord) => {
+    addWord(newWord);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { abbreviation, meaning, sentence } = e.target.elements;
+
     const newWord = {
-      id: words.length + 1,
-      word: abbreviation.value,
-      meaning: meaning.value,
-      sentence: sentence.value,
+      id: Date.now(),
+      word: abbreviation,
+      meaning,
+      sentence,
     };
-    setWords((prevWords) => [...prevWords, newWord]);
+
+    addWord(newWord); // 수정된 부분
 
     // 폼 초기화
-    e.target.reset();
+    setAbbreviation('');
+    setMeaning('');
+    setSentence('');
 
     // 페이지 이동
     navigate('/WordList');
-  };
+  }; 
 
   return (
     <>
@@ -97,13 +107,34 @@ const AddWordForm = () => {
         <Title>단어 추가하기</Title>
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="abbreviation">단어:</Label>
-          <TextInput type="text" id="abbreviation" name="abbreviation" required />
+          <TextInput
+            type="text"
+            id="abbreviation"
+            name="abbreviation"
+            value={abbreviation}
+            onChange={(e) => setAbbreviation(e.target.value)}
+            required
+          />
 
           <Label htmlFor="meaning">의미:</Label>
-          <TextInput type="text" id="meaning" name="meaning" required />
+          <TextInput
+            type="text"
+            id="meaning"
+            name="meaning"
+            value={meaning}
+            onChange={(e) => setMeaning(e.target.value)}
+            required
+          />
 
           <Label htmlFor="sentence">예시 문장:</Label>
-          <TextArea id="sentence" name="sentence" rows="4" required></TextArea>
+          <TextArea
+            id="sentence"
+            name="sentence"
+            rows="4"
+            value={sentence}
+            onChange={(e) => setSentence(e.target.value)}
+            required
+          ></TextArea>
 
           <SubmitButton type="submit" value="추가" />
         </Form>
