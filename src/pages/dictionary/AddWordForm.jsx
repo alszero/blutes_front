@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
-import WordList from './WordList';
 
 const Container = styled.div`
   display: flex;
@@ -88,7 +87,7 @@ const AddWordForm = () => {
     e.target.reset();
 
     // 페이지 이동
-    navigate('/word-list');
+    navigate('/WordList');
   };
 
   return (
@@ -109,7 +108,6 @@ const AddWordForm = () => {
           <SubmitButton type="submit" value="추가" />
         </Form>
       </Container>
-      <WordList words={words} />
     </>
   );
 };
